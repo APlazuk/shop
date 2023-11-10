@@ -51,7 +51,7 @@ public class ShopController {
     }
 
     @PostMapping("/add/{basketId}")
-    public ResponseEntity<?> addProductsToBasket(@PathVariable Long basketId, @RequestBody List<ProductDTO> productDTOList){
+    public ResponseEntity<String> addProductsToBasket(@PathVariable Long basketId, @RequestBody List<ProductDTO> productDTOList){
         Optional<Basket> basketById = basketService.findBasketById(basketId);
 
         if (basketById.isEmpty()){
