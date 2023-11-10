@@ -16,14 +16,14 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/shop")
-public class BasicShopController {
+public class ShopController {
 
     private final BasketService basketService;
     private final ProductService productService;
     private final ShopMapper shopMapper;
 
     @Autowired
-    public BasicShopController(BasketService basketService, ProductService productService, ShopMapper shopMapper) {
+    public ShopController(BasketService basketService, ProductService productService, ShopMapper shopMapper) {
         this.basketService = basketService;
         this.productService = productService;
         this.shopMapper = shopMapper;
