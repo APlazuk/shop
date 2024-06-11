@@ -26,12 +26,12 @@ public class StarterDataCreator implements ApplicationRunner {
     }
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
-        createBasket();
-        createProducts();
+    public void run(ApplicationArguments args) {
+        Basket basket = createBasket();
+        createProducts(basket);
     }
 
-    private void createProducts() {
+    private void createProducts(Basket basket) {
         Product product1 = new Product("Jeansy", createRandomPrice());
         Product product2 = new Product("Sweter", createRandomPrice());
         Product product3 = new Product("Koszula", createRandomPrice());
@@ -39,17 +39,18 @@ public class StarterDataCreator implements ApplicationRunner {
         Product product5 = new Product("Szalik", createRandomPrice());
 
         List<Product> productList = List.of(product1, product2, product3, product4, product5);
-
+        basket.setProductList(productList);
         productRepository.saveAll(productList);
 
     }
 
-    private void createBasket() {
+    private Basket createBasket() {
         Basket basket = new Basket();
         basketRepository.save(basket);
+        return basket;
     }
 
-    private double createRandomPrice(){
+    private double createRandomPrice() {
         double randomPrice = 50 + (Math.random() * ((350 - 50) + 1));
         BigDecimal bd = new BigDecimal(randomPrice);
         bd = bd.setScale(2, RoundingMode.HALF_UP);
